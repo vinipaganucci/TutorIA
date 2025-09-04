@@ -19,5 +19,23 @@ function irParaHome() {
 
     console.log(materia);
 
-    window.location.href = 'home.html';
+    if (materia == "portuguese") {
+
+        window.location.href = 'portuguese.html';
+
+    }
+
+    else if (materia == "math") {
+
+        window.location.href = 'math.html';
+
+    }
+
+    else if (materia == "history") {
+
+        window.location.href = 'history.html';
+
+    }
+
+    
 }
