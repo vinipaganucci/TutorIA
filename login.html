@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login</title>
+
+  <!-- Fonte moderna e limpa -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    
+  <div class="decor">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+  </div>
+
+  <main class="container">
+    <section class="card" role="region" aria-label="Área de login">
+      <header class="brand" aria-label="Marca">
+        <div class="logo" aria-hidden="true">
+  <!-- SVG inline do robozinho com headset -->
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Robô com headset">
+                <rect x="6" y="10" width="52" height="44" rx="9" fill="#FFFFFF" opacity="0.06"/>
+                <rect x="14" y="18" width="36" height="28" rx="6" fill="#BFE8FF"/>
+                <circle cx="26" cy="28" r="4" fill="#1F60EC"/>
+                <circle cx="38" cy="28" r="4" fill="#1F60EC"/>
+                <path d="M24 38c2 1.6 4.8 2.6 8 2.6s6-1 8-2.6" stroke="#1F60EC" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <!-- headset -->
+                <path d="M8 30a8 8 0 0 0 0 8" stroke="#163561" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.9"/>
+                <path d="M56 30a8 8 0 0 1 0 8" stroke="#163561" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.9"/>
+                <rect x="48" y="34" width="7" height="4" rx="1.2" fill="#163561" />
+                <rect x="10" y="30" width="4" height="8" rx="1.2" fill="#163561"/>
+             </svg>
+       </div>
+        <div>
+          <h1>TutorIA</h1>
+          <p>Aprendizado guiado com IA</p>
+        </div>
+      </header>
+
+      <form action="#" method="post" novalidate>
+        <div class="field">
+          <label for="name">Qual seu nome?</label>
+          <input class="input" type="text" id="name" name="name" placeholder="João Silva" required>
+        </div>
+
+        <div class="field">
+          <label for="age">Qual a sua idade?</label>
+          <input class="input" type="number" id="age" name="age" placeholder="12" required>
+        </div>
+
+        <div class="field">
+          <label for="age">Qual matéria deseja praticar?</label>
+          <select name="subject" id="subject" class="input" required>
+            <option value="portuguese">Português</option>
+            <option value="math">Matemática</option>
+            <option value="history">História</option>
+          </select>
+        </div>
+
+
+        <div class="actions">
+          <button class="btn" type="button" id="entrar" onclick="irParaHome()">Entrar</button>
+        </div>
+
+
+        <p class="footer">Protegido por reCAPTCHA • <a class="link" href="#">Termos</a></p>
+      </form>
+    </section>
+  </main>
+
+    <script src="login.js"></script>
+</body>
+</html>
