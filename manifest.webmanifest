@@ -1,0 +1,18 @@
+{
+    "short_name": "TutorIA",
+    "name": "TutorIA",
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#ffffff",
+    "theme-color": "#ffffff",
+    "background_color": "#000000",
+    "background-color": "#000000",
+    "description": "TutorIA is an AI-powered educational platform that provides personalized learning experiences and resources to students of all ages.",
+    "icons": [
+      {
+        "src": "img/97b479d1-7a48-4124-a408-76570c6ebab2.png",
+        "type": "image/png",
+        "sizes": "1024x1024"
+      }
+    ]
+  }
