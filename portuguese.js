@@ -40,7 +40,7 @@ function validarResposta() {
             showQuestion();
         } else {
             alert('Parabéns — você terminou o quiz!');
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
             // opcional: resetar ou desabilitar o botão
             // current = 0; showQuestion();
         }
