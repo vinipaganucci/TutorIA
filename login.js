@@ -1,4 +1,3 @@
-
 window.addEventListener('load', () => {
     registerSW();
 });
@@ -15,6 +14,7 @@ async function registerSW() {
 }
 
 let deferredPrompt = null;
+const installBtn = document.getElementById('btnInstall');
 
 // Detecta iOS
 function isIOS() {
@@ -37,12 +37,30 @@ function isStandalone() {
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
+  console.log('beforeinstallprompt recebido');
 
-  if (!isStandalone() && isAndroid()) {
-    // Mostra alerta
-    if (confirm("Deseja adicionar o app à tela inicial?")) {
+  // mostra botão de instalar para o usuário
+  if (!isStandalone() && isAndroid() && installBtn) {
+    installBtn.style.display = 'block';
+    installBtn.addEventListener('click', async () => {
+      installBtn.style.display = 'none';
+      if (!deferredPrompt) return;
       deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(() => {
+      const choice = await deferredPrompt.userChoice;
+      console.log('Resultado do install prompt:', choice);
+      if (choice.outcome === 'accepted') {
+        console.log('Usuário aceitou a instalação');
+      } else {
+        console.log('Usuário descartou a instalação');
+      }
+      deferredPrompt = null;
+    }, { once: true });
+  } else {
+    // fallback: se não houver botão, tenta abrir o prompt imediatamente
+    if (!isStandalone()) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(choice => {
+        console.log('Resultado do install prompt (fallback):', choice);
         deferredPrompt = null;
       });
     }
