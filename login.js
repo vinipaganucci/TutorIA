@@ -14,7 +14,9 @@ async function registerSW() {
 
 }
 
-// iOS (inclui iPadOS moderno, que se identifica como Mac)
+let deferredPrompt = null;
+
+// Detecta iOS
 function isIOS() {
   const ua = window.navigator.userAgent.toLowerCase();
   const iOSLike = /iphone|ipad|ipod/.test(ua);
@@ -26,54 +28,34 @@ function isAndroid() {
   return /android/i.test(window.navigator.userAgent);
 }
 
-// Já está instalado? (standalone)
 function isStandalone() {
   return window.matchMedia('(display-mode: standalone)').matches
-      || window.navigator.standalone === true; // Safari iOS
+      || window.navigator.standalone === true;
 }
 
-let deferredPrompt = null;
-
-// Ouça o evento somente em navegadores que o suportam (Android/Chromium)
+// Android: captura o evento beforeinstallprompt
 window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();          // impede o prompt automático
-  deferredPrompt = e;          // guarda o evento para usar depois
-  // Mostra popup do Android apenas se não estiver instalado
+  e.preventDefault();
+  deferredPrompt = e;
+
   if (!isStandalone() && isAndroid()) {
-    document.getElementById('a2hs-android').hidden = false;
+    // Mostra alerta
+    if (confirm("Deseja adicionar o app à tela inicial?")) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => {
+        deferredPrompt = null;
+      });
+    }
   }
 });
 
-// Caso o navegador não dispare o beforeinstallprompt (iOS/Safari), mostre instruções
+// iOS: instruções manuais
 window.addEventListener('load', () => {
   if (!isStandalone() && isIOS()) {
-    document.getElementById('a2hs-ios').hidden = false;
+    alert("Para instalar no iPhone: toque no botão Compartilhar (ícone quadrado com seta) e escolha 'Adicionar à Tela de Início'.");
   }
 });
 
-// Botão "Adicionar" no Android → abre o prompt nativo
-document.getElementById('btn-install')?.addEventListener('click', async () => {
-  if (!deferredPrompt) return;          // segurança
-  deferredPrompt.prompt();              // abre o prompt
-  const choice = await deferredPrompt.userChoice;
-  // Você pode analisar: choice.outcome === 'accepted' | 'dismissed'
-  deferredPrompt = null;
-  document.getElementById('a2hs-android').hidden = true;
-});
-
-// Fechar popups
-document.getElementById('btn-android-close')?.addEventListener('click', () => {
-  document.getElementById('a2hs-android').hidden = true;
-});
-document.getElementById('btn-ios-close')?.addEventListener('click', () => {
-  document.getElementById('a2hs-ios').hidden = true;
-});
-
-// Se a instalação acontecer (qualquer plataforma), esconda tudo
-window.addEventListener('appinstalled', () => {
-  document.getElementById('a2hs-android').hidden = true;
-  document.getElementById('a2hs-ios').hidden = true;
-});
 
 
 const botao = document.getElementById('entrar');
