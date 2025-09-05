@@ -10,7 +10,7 @@ document.getElementById('mensagem').textContent = `Vamos lá, ${nome}! Você tem
 
 // substitui a lógica atual por um pequeno gerenciador de perguntas:
 const questions = [
-    { q: 'Qual é o plural da palavra cachorro? 🐶', a: ['cães', 'caes'] },
+    { q: 'Qual é o coletivo da palavra cachorro? 🐶', a: ['cachorros'] },
     { q: 'Qual é o antônimo (o contrário) da palavra alto?', a: ['baixo'] }
 ];
 
