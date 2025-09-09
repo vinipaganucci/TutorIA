@@ -53,3 +53,9 @@ function irParaHome() {
 
     
 }
+
+function irParaAPI() {
+
+    window.location.href = 'api.html';
+
+}
