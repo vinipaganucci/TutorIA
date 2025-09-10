@@ -21,40 +21,96 @@
   </div>
 
   <main class="container">
+
     <section class="card" role="region" aria-label="Área de login">
+
       <header class="brand" aria-label="Marca" id="slogan">
+
         <div class="logo" aria-hidden="true">
-            <div class="illustration">
-              <img src="img/97b479d1-7a48-4124-a408-76570c6ebab2.png" alt="">
+
+            <div id="logo-tutoria">
+              <img src="img/ChatGPT Image Sep 10, 2025, 10_58_42 AM.png" alt="">
             </div>
 
        </div>
+
         <div>
-          <h1>TutorIA</h1>
+          <h1>Tutoria</h1>
           <p>Aprendizado guiado com IA</p>
         </div>
+
       </header>
 
       <form action="#" method="post" novalidate>
-        <div class="field">
+
+        
+
+        <div class="row" style="gap: 15px;">
+
+          <div class="field">
           <label for="name">Qual seu nome?</label>
-          <input class="input" type="text" id="name" name="name" placeholder="João Silva" required>
+          <input class="input" type="text" id="name" name="name" placeholder="Digite seu nome" required>
         </div>
 
         <div class="field">
-          <label for="age">Qual a sua idade?</label>
-          <input class="input" type="number" id="age" name="age" placeholder="12" required>
+          <label for="age">Série / Idade</label>
+          <input class="input" type="text" id="age" name="age" placeholder="Digite sua idade" required>
+        </div>
+
         </div>
 
         <div class="field">
-          <label for="age">Qual matéria deseja praticar?</label>
-          <select name="subject" id="subject" class="input" required>
-            <option value="portuguese">Português</option>
-            <option value="math">Matemática</option>
-            <option value="history">História</option>
+          <label for="subject">Matéria / Tópico</label>
+          <input class="input" type="text" id="subject" name="subject" placeholder="Ex: Frações | Revolução Industrial | Verbos" required>
+        </div>
+
+        
+
+        <div class="row">
+          <div class="field">
+            <label class="label">Nível de conforto (0 a 10)</label>
+            <div class="control-row">
+              <input id="pc_conforto" class="range" type="range" min="0" max="10" step="1" value="5">
+              <output id="pc_conforto_out">5</output>
+            </div>
+          </div>
+          
+          <div class="field">
+            <label class="label">Tempo disponível (min)</label>
+            <input type="number" class="input" name="time">
+          </div>
+          
+        </div>
+
+
+        <div class="row" style="gap: 15px;">
+
+          <div class="field">
+          <label class="label">Preferência</label>
+          <select id="pc_modo" class="input">
+            <option value="Resumo rápido ⚡">Resumo rápido</option>
+            <option value="Passo a passo 🪜">Passo a passo</option>
           </select>
         </div>
 
+          <div class="field">
+          <label class="label">Objetivo da sessão</label>
+          <select id="pc_objetivo" class="input">
+            <option>Entender uma regra</option>
+            <option>Treinar exercícios</option>
+            <option>Revisar prova</option>
+            <option>Tirar 10 na prova</option>
+            <option>Outro</option>
+          </select>
+        </div>
+
+        </div>
+
+
+        
+
+        
+        
 
         <div class="actions">
           <button class="btn" type="button" id="entrar" onclick="irParaHome()">Começar!</button>
@@ -64,10 +120,13 @@
 
         <p class="footer">Protegido por reCAPTCHA • <a class="link" href="#">Termos</a></p>
       </form>
+
     </section>
+
   </main>
 
     <script src="login.js"></script>
     
 </body>
+
 </html>

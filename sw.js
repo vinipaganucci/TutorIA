@@ -1,4 +1,4 @@
-const cacheName = 'tutoria'
+const cacheName = 'tutoria-v2'
 
 self.addEventListener('install', function(event){
     event.waitUntil(

@@ -4,7 +4,7 @@
 
 :root{
   --bg:#EFFEFF;          /* azul bem clarinho de fundo */
-  --ink:#13324F;         /* texto principal */
+  --ink:#020507;         /* texto principal */
   --muted:#6C87AF;       /* texto auxiliar */
   --card:#FFFFFF;        /* áreas brancas */
   --line:#D7E7FF;        /* bordas suaves */
@@ -15,22 +15,20 @@
 }
 
 *{ box-sizing:border-box }
-html,body{ height:100% }
+html,body{ height:100%;}
 body{
   margin:0;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
-  color:var(--ink);
-  background:
-    radial-gradient(1200px 800px at 100% 0%, #E6F1FF 0%, transparent 60%),
-    radial-gradient(1200px 800px at 0% 100%, #E6F6FF 0%, transparent 60%),
-    var(--bg);            
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: var(--ink);
   min-height:100%;
-  background-color: #3A53E0;
+  background-color: #3A53E0;  /* azul fixo */
+  background-image: none;      /* garante que nenhum gradiente apareça */
 }
 
 #body-login {
   display: flex;
-  background-color: #3A53E0;
+  background-color: #3A53E0;   /* azul fixo */
+  background-image: none;
 }
 
 /* ====== LAYOUT EM TELA CHEIA ====== */
@@ -44,23 +42,23 @@ body{
 
 .card{
   width:100%;
-  max-width: 820px;                 /* largura limite para desktop */
+  max-width: 980px;                /* aumentado de 820px para 980px */
   background: linear-gradient(#ffffff, #ffffff);
   border: 2px solid var(--line);
   border-radius: 26px;
   box-shadow: 0 28px 60px rgba(31,96,236,.12);
-  padding: clamp(20px, 4vw, 36px);
+  padding: clamp(24px, 4.5vw, 44px); /* um pouco mais de padding */
   display:grid;
   grid-template-columns: 1fr;       /* mobile: uma coluna */
-  gap: 20px;
+  gap: 24px;                        /* aumenta espaçamento */
 }
 
-/* desktop/tablet: duas áreas (ilustração + conteúdo) */
+/* desktop/tablet: deixa a coluna direita (form) maior que a esquerda (ilustração) */
 @media (min-width: 860px){
   .card{
-    grid-template-columns: 1.1fr 1fr;
-    gap: 32px;
-    padding: 40px;
+    grid-template-columns: 0.9fr 1.4fr; /* ilustração menor, formulário maior */
+    gap: 36px;
+    padding: 44px;
   }
 }
 
@@ -74,7 +72,18 @@ body{
   padding: 4px;
 }
 
-.brand{ margin-top: 10px }
+.brand{
+  margin: 0;                       /* remove o empurrão pra baixo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;             /* centraliza horizontalmente */
+  justify-content: center;         /* centraliza verticalmente */
+  text-align: center;
+  height: 100%;
+  place-self: center;              /* centraliza o bloco dentro da célula do grid */
+}
+
+
 .brand h1{
   margin: 10px 0 6px;
   font-weight: 900;
@@ -101,7 +110,35 @@ body{
   box-shadow: 0 14px 30px rgba(46,125,251,.18), inset 0 2px 0 #fff;
   overflow:hidden;
 }
-.illustration img{ width:82%; height:82%; object-fit:contain; display:block }
+
+#logo-tutoria {
+  width: 260px !important;
+  height: 260px !important;
+  display: grid;
+  place-items: center;
+  margin: 0 auto;
+}
+
+/* faz a imagem ocupar todo o contêiner (sem limitar por max-width anterior) */
+#logo-tutoria img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+/* reduções para telas menores */
+@media (max-width: 1200px) {
+  #logo-tutoria { width: 220px !important; height: 220px !important; }
+}
+@media (max-width: 900px) {
+  #logo-tutoria { width: 180px !important; height: 180px !important; }
+}
+@media (max-width: 520px) {
+  #logo-tutoria { width: 140px !important; height: 140px !important; }
+}
 
 /* ====== BLOCO DIREITO — FORM ====== */
 .form-wrap{
@@ -117,12 +154,13 @@ label{ font-size:14px; color: var(--muted) }
   background:#fff;
   border:2px solid var(--line);
   border-radius: 18px;
-  padding: 14px 16px;
+  padding: 16px 18px;     /* aumenta padding para deixar o campo "maior" */
   font-size: 16px;
   color: var(--ink);
   outline:none;
   transition: border-color .2s, box-shadow .2s, transform .08s;
   box-shadow: 0 3px 0 rgba(46,125,251,.06) inset;
+  min-height:44px;        /* força altura mínima confortável */
 }
 .input::placeholder{ color:#9EB4E0 }
 .input:hover{ border-color:#C6DBFF }
@@ -175,6 +213,46 @@ a:hover{ text-decoration:underline }
   .card{ padding: 20px }
 }
 
+@media (min-width: 860px){
+  .card{
+    grid-template-columns: 1fr 1fr;  /* colunas iguais (antes era 1.1fr 1fr) */
+    gap: 32px;
+    padding: 40px;
+    align-items: center;             /* centraliza verticalmente cada item do grid */
+  }
+}
+
+/* garante que o bloco da esquerda fique perfeitamente centrado na célula do grid */
+@media (min-width: 860px) {
+  .brand {
+    align-self: center;      /* centraliza verticalmente dentro do grid */
+    justify-content: center; /* centraliza o conteúdo internamente */
+    gap: 14px;               /* espaço entre logo e texto */
+    padding: 8px 0;
+  }
+
+  /* separa a logo do título */
+  #logo-tutoria {
+    margin-bottom: 6px; /* espaço extra entre imagem e texto (opcional ajustar) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* controla melhor o tamanho da imagem para não "empurrar" o texto */
+  #logo-tutoria img {
+    max-width: 140px;
+    max-height: 140px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+}
+
+/* aplica pequeno espaçamento também em telas menores */
+.brand { gap: 10px; }
+#logo-tutoria { margin-bottom: 8px; }
 
 #slogan {
   display: flex;
@@ -182,7 +260,7 @@ a:hover{ text-decoration:underline }
   align-items: center;      /* centraliza horizontalmente */
   justify-content: center;  /* centraliza verticalmente dentro do espaço */
   text-align: center;       /* centraliza textos */
-  gap: 12px; 
+  gap: px; 
 }
 
 #slogan .illustration img {
@@ -243,3 +321,51 @@ a:hover{ text-decoration:underline }
   padding: clamp(20px, 2vw, 36px);
   
 }
+
+/* Utilitário: linhas com colunas flexíveis (campos alinhados e do mesmo tamanho) */
+.row {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+/* Faz cada campo dentro da linha crescer igualmente e permitir shrink correto */
+.row .field {
+  flex: 1 1 0;
+  min-width: 0; /* importante para evitar overflow do input */
+}
+
+/* quando um filho da row não for .field (ex: range + output),
+   mantenha comportamento previsível — opcional */
+.row > div:not(.field) { flex: 1 1 0; min-width: 0; }
+
+/* Linha de controle do range: mantém o slider e coloca o valor à direita */
+.control-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+}
+
+/* faz o slider crescer ocupando o espaço disponível */
+.control-row .range{
+  flex:1 1 auto;
+  min-width:0;
+}
+
+/* estilo do número (output) — aparece à direita e alinhado */
+.control-row output{
+  margin-left:12px;    /* espaço entre slider e número */
+  min-width:38px;
+  text-align:center;
+  font-weight:700;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  padding: 6px 8px;
+  box-shadow: none;
+}
+
+/* garante alinhamento vertical da linha inteira com os outros campos */
+.row { align-items: center; }

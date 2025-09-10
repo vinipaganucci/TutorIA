@@ -54,8 +54,5 @@ function irParaHome() {
     
 }
 
-function irParaAPI() {
+pc_conforto.addEventListener('input', () => pc_conforto_out.value = pc_conforto.value);
 
-    window.location.href = 'api.html';
-
-}
