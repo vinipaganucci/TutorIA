@@ -146,6 +146,7 @@ body{
 }
 
 form{ display:grid; gap: 14px; margin-top: 6px }
+
 .field{ display:grid; gap:8px }
 label{ font-size:14px; color: var(--muted) }
 
@@ -369,3 +370,345 @@ a:hover{ text-decoration:underline }
 
 /* garante alinhamento vertical da linha inteira com os outros campos */
 .row { align-items: center; }
+
+/* Força nenhum scroll na página e faz o card caber no viewport */
+html, body, #body-login {
+  height: 100vh !important;
+  margin: 0 !important;
+  overflow: hidden !important; /* remove scroll da página inteira */
+}
+
+/* reduz o padding do container para ganhar espaço */
+.container {
+  height: 100vh;
+  padding: 12px !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* limita o card para caber sempre no viewport sem scroll interno */
+.card{
+  width: 100%;
+  max-width: 820px;                      /* reduz largura máxima */
+  max-height: calc(100vh - 24px);        /* garante que caiba verticalmente */
+  padding: 18px !important;              /* padding menor para economizar espaço */
+  border-radius: 18px;
+  overflow: visible !important;          /* NÃO permitir scroll interno */
+  display: grid;
+  grid-auto-rows: min-content;
+}
+
+/* compacta espaçamentos e fontes para evitar quebra de linhas */
+.brand h1{ font-size: clamp(20px, 3.6vw, 32px) !important; margin-top:6px; }
+.brand p { font-size: clamp(12px, 2.4vw, 14px) !important; }
+
+/* logo menor para ganhar espaço vertical */
+#logo-tutoria {
+  width: 180px !important;
+  height: 180px !important;
+}
+
+/* imagem preenche contêiner */
+#logo-tutoria img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+/* inputs e botões um pouco mais compactos */
+.input, textarea, select.input {
+  padding: 10px 12px !important;
+  font-size: 14px !important;
+  min-height: 38px !important;
+}
+
+/* botões menores para caber */
+.btn {
+  padding: 12px 14px !important;
+  font-size: 15px !important;
+  border-radius: 16px !important;
+  box-shadow: 0 10px 24px rgba(46,125,251,.26) !important;
+}
+
+/* reduz gaps entre campos */
+form { gap: 10px !important; }
+.field { gap: 6px !important; }
+.row { gap: 12px !important; }
+
+/* evita quebra de labels e placeholders: mantêm em uma linha e cortam com reticências */
+label, .label {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: block;
+  font-size: 13px !important;
+}
+
+/* força placeholder e conteúdo do input a não quebrar linha */
+.input, .input::placeholder, textarea::placeholder {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* range control + output compacto */
+.control-row output {
+  min-width: 34px;
+  padding: 6px 8px;
+  font-size: 13px;
+}
+
+/* quando a altura da tela for muito pequena, compacta ainda mais */
+@media (max-height: 720px) {
+  .card { padding: 12px !important; max-width: 740px; max-height: calc(100vh - 12px); }
+  #logo-tutoria { width: 140px !important; height: 140px !important; }
+  .brand h1{ font-size: 22px !important; }
+  .input { padding: 8px 10px !important; font-size: 13px !important; }
+  .btn { padding: 10px 12px !important; font-size: 14px !important; }
+}
+
+/* pequenas correções para larguras médias */
+@media (max-width: 1100px) {
+  .card { max-width: 720px; }
+}
+@media (max-width: 860px) {
+  .card { grid-template-columns: 1fr; padding: 14px !important; }
+  #logo-tutoria { width: 140px !important; height: 140px !important; }
+  .brand h1{ font-size: 24px !important; }
+}
+
+/* Alinha o número (output) do range com o label */
+.field { position: relative; }
+
+/* adapta o layout do controle: slider ocupa a largura restante e o output fica posicionado à direita */
+.control-row{
+  display: block; /* linha única, slider em linha e output posicionado */
+  width: 100%;
+  position: relative;
+}
+
+.control-row .range{
+  width: calc(100% - 56px); /* reserva espaço para o output à direita */
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+/* posiciona o output alinhado verticalmente com o texto do label (ajuste top se necessário) */
+.control-row output{
+  position: absolute;
+  right: 0;
+  top: calc(1.6em); /* desloca para ficar alinhado com o label; ajuste o valor se precisar */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 32px;
+  padding: 6px 8px;
+  font-weight:700;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+/* pequenas adaptações em telas menores */
+@media (max-width: 860px) {
+  .control-row .range { width: calc(100% - 48px); }
+  .control-row output { top: calc(1.6em); }
+}
+
+/* FORÇA: output ao lado do slider, alinhado com o input da coluna ao lado */
+.row > .field .control-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  position: static !important;   /* remove posicionamento absoluto anterior */
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.row > .field .control-row .range{
+  flex: 1 1 auto !important;
+  width: auto !important;
+  margin: 0 !important;
+}
+
+/* output fica estático ao lado do slider e tem a mesma altura dos inputs */
+.row > .field .control-row output {
+  position: static !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 36px !important;
+  height: 38px !important;           /* mesma altura dos .input */
+  padding: 0 8px !important;
+  font-size: 13px !important;
+  border-radius: 12px !important;
+  border: 2px solid var(--line) !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+
+/* garante que a linha inteira (labels + controles) mantenha o mesmo alinhamento */
+.row { align-items: center !important; }
+
+/* ajusta caso media queries antigas tentem redefinir top/position */
+.control-row output[style], .control-row output {
+  top: auto !important;
+  right: auto !important;
+}
+
+/* Texto de dica abaixo do textarea: mesmo tamanho e cor dos outros textos auxiliares */
+.tip {
+  font-size: 13px !important;
+  color: var(--muted) !important;
+  line-height: 1.3 !important;
+  margin-top: 6px !important;
+}
+
+/* reduz tamanho do output específico do slider */
+#pc_conforto_out {
+  min-width: 30px !important;
+  width: 30px !important;
+  height: 30px !important;
+  padding: 0 6px !important;
+  font-size: 12px !important;
+  line-height: 30px !important;
+  border-radius: 8px !important;
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* garante alinhamento vertical com os inputs */
+.row .field .control-row { align-items: center; }
+.row .field .control-row output { margin: 0 0 0 6px; }
+
+/* RESPONSIVE: iPhone SE até modern phones/tablets
+   Adicione no final do styles.css e salve (Ctrl+S). Recarregue (Ctrl+F5). */
+
+/* --- Global small adjustments (phones) --- */
+@media (max-width: 860px) {
+  html,body,#body-login { height: auto; overflow:auto; } /* permite scroll natural em mobile */
+  .container { padding: 12px; align-items:flex-start; }
+  .card{
+    width: calc(100% - 20px) !important;
+    max-width: 820px;
+    padding: 14px !important;
+    border-radius: 14px !important;
+    grid-template-columns: 1fr !important; /* forçar 1 coluna */
+    gap: 14px !important;
+    box-shadow: 0 18px 40px rgba(31,96,236,.10) !important;
+    max-height: none;
+    overflow: visible;
+  }
+
+  /* logo e texto */
+  #logo-tutoria { width: 140px !important; height: 140px !important; }
+  #logo-tutoria img { width:100%; height:100%; object-fit:contain; }
+  .brand h1 { font-size: 22px !important; }
+  .brand p  { font-size: 13px !important; }
+
+  /* formulário: empilhar campos lado-a-lado → coluna única */
+  .row { flex-direction: column; gap: 10px !important; align-items: stretch !important; }
+  .row .field { flex: 1 1 auto; width: 100%; min-width: 0; }
+  .field { gap: 6px !important; }
+
+  /* inputs maiores e fáceis de tocar */
+  .input, textarea, select.input {
+    padding: 12px 14px !important;
+    font-size: 15px !important;
+    min-height:44px !important;
+  }
+
+  /* botão com boa área de toque */
+  .btn {
+    padding: 14px 18px !important;
+    font-size: 16px !important;
+    border-radius: 14px !important;
+  }
+
+  /* label e placeholder voltam a quebrar linha em telas pequenas */
+  label, .label, .input::placeholder, textarea::placeholder {
+    white-space: normal !important;
+    text-overflow: clip !important;
+    overflow: visible !important;
+  }
+
+  /* slider + output: output ao lado mas reduzido para caber em coluna */
+  .control-row {
+    display:flex !important;
+    align-items:center !important;
+    gap: 8px !important;
+    width:100% !important;
+  }
+  .control-row .range { flex:1 1 auto; min-width:0; height:8px; }
+  .control-row output {
+    flex: 0 0 44px !important;
+    height: 36px !important;
+    font-size: 13px !important;
+  }
+}
+
+/* iPhone SE / very narrow phones (<= 380px) */
+@media (max-width: 380px) {
+  .card {
+    width: calc(100% - 12px) !important;
+    padding: 10px !important;
+    border-radius: 12px !important;
+  }
+
+  #logo-tutoria { width: 120px !important; height: 120px !important; }
+  .brand h1 { font-size: 20px !important; }
+  .brand p  { font-size: 12px !important; }
+
+  .input, textarea, select.input { padding: 10px 12px !important; font-size: 14px !important; min-height:40px !important; }
+  .btn { padding: 12px 14px !important; font-size: 15px !important; }
+
+  /* range output ainda menor para não quebrar o layout */
+  .control-row output { flex: 0 0 36px !important; height: 34px !important; font-size: 12px !important; padding: 0 6px !important; }
+  .control-row .range { height:7px; }
+}
+
+/* Tablets and small desktops: increase spacing a bit */
+@media (min-width: 861px) and (max-width: 1100px) {
+  .card { max-width: 820px; padding: 28px; gap: 24px; }
+  #logo-tutoria { width: 200px; height: 200px; }
+}
+
+/* Ensure high-DPI devices look sharp and no unexpected overflow */
+@media (any-hover: none) {
+  .btn { box-shadow: 0 10px 24px rgba(46,125,251,.22); }
+}
+
+/* small utility: make sure .row .field won't shrink placeholders */
+.row .field { min-width: 0; }
+
+/* end responsive block */
+
+/* Small overrides for narrow viewports — only enable transform & ensure container fits.
+   These rules do not change desktop layout (they live inside a narrow-media query). */
+@media (max-width: 860px) {
+  /* allow JS to control page scroll when scaling */
+  html, body, #body-login {
+    height: 100% !important;
+    margin: 0 !important;
+    /* keep default overflow; script will set hidden when it scales */
+    overflow: auto !important;
+  }
+
+  /* make card transformable without altering layout on desktop */
+  .card{
+    transform-origin: top center !important;
+    will-change: transform !important;
+    transition: transform .12s ease-out !important;
+    /* keep grid/spacing as-is; script will scale the whole card to fit */
+  }
+
+  /* slightly reduce horizontal padding pressure so scale works better on very narrow devices */
+  .container { padding-left: 8px !important; padding-right: 8px !important; }
+}
