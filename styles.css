@@ -18,7 +18,7 @@
 html,body{ height:100%;}
 body{
   margin:0;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: var(--ink);
   min-height:100%;
   background-color: #3A53E0;  /* azul fixo */
@@ -27,7 +27,7 @@ body{
 
 #body-login {
   display: flex;
-  background-color: #3A53E0;   /* azul fixo */
+  background-color: #0dabd3;   /* azul fixo */
   background-image: none;
 }
 
@@ -89,11 +89,11 @@ body{
   font-weight: 900;
   font-size: clamp(28px, 7vw, 44px);
   letter-spacing:.2px;
-  color:#3A53E0;                     /* título azulado */
+  color:#000000;                     /* título azulado */
 }
 .brand p{
   margin:0;
-  color: var(--muted);
+  color: black;
   font-size: clamp(14px, 3.6vw, 18px);
 }
 
@@ -190,7 +190,7 @@ select.input{
   appearance:none; border:0; border-radius: 20px;
   padding: 15px 18px; font-weight: 800; letter-spacing:.3px;
   color:#fff; font-size: 17px; cursor:pointer;
-  background: linear-gradient(180deg, var(--blue), var(--blue-dark));
+  background: #3A53E0;
   box-shadow: 0 14px 30px rgba(46,125,251,.32);
   transition: transform .15s, filter .2s, box-shadow .2s;
 }
